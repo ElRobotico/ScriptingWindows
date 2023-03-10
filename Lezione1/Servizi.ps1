@@ -1,4 +1,7 @@
-﻿<# Recuperare l'help del comando Get-Service #>
+﻿<# Abilitare policy di esecuzione per alcuni script #>
+Set-ExecutionPolicy Unrestricted
+
+<# Recuperare l'help del comando Get-Service #>
 Get-Help Get-Service
 
 <# Aggiornare le guide dei comandi #>
