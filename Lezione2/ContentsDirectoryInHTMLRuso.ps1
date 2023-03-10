@@ -15,5 +15,5 @@
 
 ----------------------------------------------------------------------------- #>
 
-$Directory = "C:\Windows"
-Get-ChildItem $Directory | Select-Object Name |ConvertTo-Html | Out-File "C:\Users\user\Desktop\WindowsDIR.html"
+$Directory = "C:\temp"
+Get-ChildItem $Directory | Select-Object Name |ConvertTo-Html | Out-File "$Directory\WindowsDIR.html"
