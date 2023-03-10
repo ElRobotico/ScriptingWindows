@@ -13,3 +13,9 @@ $Grandezza = $Grandezza -1
 
 $Directory = $Directory.Split("\")[$Grandezza]
 Write-Host $Directory
+
+<# ALTERNATIVA RISTRETTA 
+
+$File = $Directory.Split("\")[-1]
+
+#>
