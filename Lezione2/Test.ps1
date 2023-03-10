@@ -1,1 +1,0 @@
-Wirte-Host "Ciao"
