@@ -12,4 +12,4 @@
 $path = Read-Host "Inserisci il path"
 $exitPath = Read-Host "Inserisci il percorso dove vuoi avere il file html"
 
-Get-ChildItem $path |Select-Object Name | ConvertTo-Html | Out-File "$exitpath\bigpav.html"
+Get-ChildItem $path | ConvertTo-Html -Property Name| Out-File "$exitpath\bigpav.html"
