@@ -12,4 +12,4 @@
 ################################################
 $DataDiOggi = Get-Date -Format "dd-MM-yyyy"
 $exportpath = "C:\temp"
-Get-Process | Select-Object -First 20 | Sort-Object -Property ID | Export-CSV -Path "$exportpath\$datadioggi.csv"
+Get-Process | Select-Object -First 20 | Sort-Object -Property ID | Export-CSV -Path "$exportpath\$datadioggi`_Process.csv"
