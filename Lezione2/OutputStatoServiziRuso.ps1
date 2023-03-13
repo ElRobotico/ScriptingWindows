@@ -28,5 +28,5 @@ Get-Service | Sort-Object STATUS | Format-Table -Property NAME, STATUS -AutoSize
 <# Filtra quelli in stato running #>
 
 Get-Service | Where-Object { $_.Status -eq 'Running' }
-Get-Service | Where-Object Status -eq 'Running' }
 
+Get-Service | Where-Object { Status -eq 'Running' }
