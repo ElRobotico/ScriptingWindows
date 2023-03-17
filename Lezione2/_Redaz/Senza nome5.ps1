@@ -1,0 +1,1 @@
+﻿Get-Process | Format-Table -Property Name,Id,Path -AutoSize
