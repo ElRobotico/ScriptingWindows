@@ -2,7 +2,7 @@
 
                                 SCRIPT IN WINDOWS
 
-    FUNCTION : Create a CSV list with the first 20 processes in execution, sort them descending in order of ID;
+    FUNCTION : Create a CSV list with the first 20 processes in execution, sort them descending in order by ID;
             Then, there's a script that create a scheduled task working every 10 min and it execute the first script done.
 
         WRITER : Emanuele Caruso
