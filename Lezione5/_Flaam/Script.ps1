@@ -27,8 +27,10 @@ function log {
     }
     if ($colore -eq "Red") {
         Write-Host "ERROR | $testo" -ForegroundColor "Red"
+    } else {
+        Write-Host "Undefined | $testo"
     }
 }
 
 # Funzione chiamata
-log -testo "Inizio Esecuzione alle $data" -colore "Red"
+log -testo "Inizio Esecuzione alle $data" -colore "Pink"
