@@ -1,21 +1,3 @@
-﻿# Script-1.ps1
-#
-# Version History
-# v0.1 -STESURA INIZIALE - Estrae i log dell'antivirus
-#
-# Autore: Matteo Redaelli - matteo.redaelli@itstechtalentfactory.it
-# Data prima stesura: 13/05/2023
-# Data ultima modifica: 13/05/2023
-# Ultimo autore: Matteo Redaelli - matteo.redaelli@itstechtalentfactory.it
-#
-# Qualsiasi riproduzione non autorizzata, anche se parziale, e'vietata
-#
-# NOTE IMPORTANTI:
-# -Non effettuate alcuna modifica se non sapete dove mettere le mani
-# REQUISITI:
-# Nessuno
-
-
 #variabili
 $lognumber = Read-Host "Inserire il numero di log totali che si vuole visualizzare ed esportare (Verranno estratti a partire dal più recente)"
 $path = Read-Host "Percorso nel quale salvare il file contenente tutti i log (Esempio C:\Windows)"
