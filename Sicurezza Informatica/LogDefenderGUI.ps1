@@ -1,48 +1,48 @@
 ﻿Add-Type -AssemblyName System.Windows.Forms
 
-# Crea la finestra
+#Creazione delle finestra
 $Form = New-Object System.Windows.Forms.Form
 $Form.Text = "Estrazione log di Windows Defender"
 $Form.Size = New-Object System.Drawing.Size(500, 220)
 
-# Crea le etichette
+#Creazione delle etichette
 $LogNumberLabel = New-Object System.Windows.Forms.Label
-$LogNumberLabel.Location = New-Object System.Drawing.Point(20, 20)
-$LogNumberLabel.Size = New-Object System.Drawing.Size(150, 25)
+$LogNumberLabel.Location = New-Object System.Drawing.Point(20, 15)
+$LogNumberLabel.Size = New-Object System.Drawing.Size(150, 30)
 $LogNumberLabel.Text = "Numero di log totali da estrarre (dal più recente):"
 $Form.Controls.Add($LogNumberLabel)
 
 $PathLabel = New-Object System.Windows.Forms.Label
-$PathLabel.Location = New-Object System.Drawing.Point(20, 65)
-$PathLabel.Size = New-Object System.Drawing.Size(150, 25)
+$PathLabel.Location = New-Object System.Drawing.Point(20, 55)
+$PathLabel.Size = New-Object System.Drawing.Size(150, 30)
 $PathLabel.Text = "Percorso di salvataggio esistente:"
 $Form.Controls.Add($PathLabel)
 
 $PathLabel2 = New-Object System.Windows.Forms.Label
-$PathLabel2.Location = New-Object System.Drawing.Point(170, 85)
-$PathLabel2.Size = New-Object System.Drawing.Size(150, 25)
+$PathLabel2.Location = New-Object System.Drawing.Point(170, 90)
+$PathLabel2.Size = New-Object System.Drawing.Size(200, 40)
 $PathLabel2.Text = "(Esempio C:\Windows\Log)"
 $Form.Controls.Add($PathLabel2)
 
-# Crea i campi di testo
+#Creazione dei campi di testo
 $LogNumberBox = New-Object System.Windows.Forms.TextBox
 $LogNumberBox.Location = New-Object System.Drawing.Point(170, 20)
 $LogNumberBox.Size = New-Object System.Drawing.Size(300, 25)
 $Form.Controls.Add($LogNumberBox)
 
 $PathBox = New-Object System.Windows.Forms.TextBox
-$PathBox.Location = New-Object System.Drawing.Point(170, 60)
+$PathBox.Location = New-Object System.Drawing.Point(170, 65)
 $PathBox.Size = New-Object System.Drawing.Size(300, 25)
 $Form.Controls.Add($PathBox)
 
-# Crea il pulsante
+#Pulsanti
 $Button = New-Object System.Windows.Forms.Button
 $Button.Location = New-Object System.Drawing.Point(190, 120)
 $Button.Size = New-Object System.Drawing.Size(100,50)
 $Button.Text = "ESEGUI"
 $Form.Controls.Add($Button)
 
-# Aggiunge l'azione al pulsante
+#Azione pulsante
 $Button.Add_Click({
     $lognumber = $LogNumberBox.Text
     $path = $PathBox.Text
@@ -60,5 +60,5 @@ $Button.Add_Click({
     }
 })
 
-# Mostra la finestra
-$Form.ShowDialog() | Out-Null
+#Mostra la finestra
+$Form.ShowDialog() | Out-Null 
