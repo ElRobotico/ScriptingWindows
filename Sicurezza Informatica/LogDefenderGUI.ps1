@@ -15,7 +15,7 @@ $Form.Controls.Add($LogNumberLabel)
 $PathLabel = New-Object System.Windows.Forms.Label
 $PathLabel.Location = New-Object System.Drawing.Point(20, 65)
 $PathLabel.Size = New-Object System.Drawing.Size(150, 25)
-$PathLabel.Text = "Percorso di salvataggio:"
+$PathLabel.Text = "Percorso di salvataggio esistente:"
 $Form.Controls.Add($PathLabel)
 
 $PathLabel2 = New-Object System.Windows.Forms.Label
