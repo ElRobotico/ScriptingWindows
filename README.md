@@ -1,6 +1,14 @@
 # ScriptingWindows
-Scripts for Scripting in Windows
-This repository hosts the solutions to assigned execises in Scripting in Windows lessons.<br>
-In each lesson folder you'll find subfolders containing solutions by each one of us.
 
-<i>Repository owned by ElRobotico</i>
+This repository contains a collection of PowerShell scripts for Windows system administration and automation.
+
+## Main Contributors
+
+- @Flaam
+- @Rusothereal
+- @b1gp
+- @Reda2200
+
+## Copyright
+
+© 2023 ElRobotico and contributors. This repository is licensed under the MIT license. See `LICENSE` for details.
