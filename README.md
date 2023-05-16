@@ -4,10 +4,10 @@ This repository contains a collection of PowerShell scripts for Windows system a
 
 ## Main Contributors
 
-- @Flaam
-- @Rusothereal
-- @b1gp
-- @Reda2200
+- [@Flaam](https://github.com/Flaam)
+- [@Rusothereal](https://github.com/Rusothereal)
+- [@b1gp](https://github.com/b1gp)
+- [@Reda2200](https://github.com/Reda2200)
 
 ## Copyright
 
