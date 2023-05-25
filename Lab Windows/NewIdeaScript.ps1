@@ -26,15 +26,16 @@
 
 # Data da utilizzare per la rinomina del Computer
 $datadioggi = Get-Date -Format yyyyMMdd
+# Variabile utilizzata per la rinomina del computer + data corrente
 $nomecomputer = "CW" + "$datadioggi"
+# Path del file di Log
 $logfile = "C:\Windows\Logs\$nomecomputer" + ".log"
 
-# Effettua un check della chiave di registro che verrà creata successivamente, questo permetterà di verificare che lo script non sia già stato eseguito
+# Effettua un check della chiave di registro che verrà creata successivamente, questo permetterà di verificare se lo script sia già stato eseguito, in tal caso non eseguirà nessuna azione.
 if (Test-Path "HKLM:\Software\RETI") {
         Write-Host "Lo script è già stato eseguito"
-}
-else {
-# Funzione di Log, che permette di selezionare a scelta un livello di messaggio: INFO, WARNING, ERROR        
+}else {
+# Funzione di Log, che permette di selezionare a scelta un livello di messaggio (INFO, WARNING, ERROR, NULL), i messaggi verranno salvati nella cartella C:\Windows\Logs\$nomecomputer.log        
         function log {
                 param ( [Parameter(Mandatory = $true)] [string] $messaggio, [Parameter(Mandatory = $true)][string] $log )
                 $date = Get-Date -Format "dd/MM/yyyy_HH:mm:ss"
@@ -65,8 +66,9 @@ else {
                 return $output;
                 Write-Host $output
         }
-        # Primo messaggio di log con data e ora di esecuzione
+        # Variabile utilizzata per stampare l'ora nel primo messaggio di Log
         $ora = Get-Date -Format HH:mm:ss
+        # Primo messaggio di log con data e ora di esecuzione
         log -messaggio "------------------------------------------Script eseguito il $($datadioggi) alle $($ora) ------------------------------------------" -log null
 
         # Rinomina il computer con la sigla CW e la data di esecuzione dello script
@@ -77,9 +79,11 @@ else {
         catch {
                 log -messaggio "Impossibile cambiare il nome del computer, causa: $_" -log err
         }
-        # Cambio Password dell'utente Administrator
+        # Cambio la Password dell'utente Administrator
         try {
+                # Variabile utilizzata per la Password di Admin
                 $password = "Admin_" + $nomecomputer
+                # Comando per selezionare l'utente al quale si vogliono appportare modifiche, in questp caso la password, la password deve prima essere convertita in una stringa sicura tramite ConvertTo-SecureString ...
                 Set-LocalUser -Name "Administrator" -Password (ConvertTo-SecureString -String $password -AsPlainText -Force)
                 log -messaggio "La Password di Admin è stata cambiata" -log info
         }
