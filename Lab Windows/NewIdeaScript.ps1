@@ -157,25 +157,8 @@ else {
         catch {
                 log -messaggio "Impossibile installare Notepad, causa: $_" -log err
         }
-
-        # Genera un finestra di avviso a fine Script per poter applicare le modifiche riavviando il computer
-        # 
-
-        Add-Type -AssemblyName System.Windows.Forms
-        Add-Type -AssemblyName System.Drawing
-
-        $dialogResult = [System.Windows.Forms.MessageBox]::Show("Le modifiche diverranno effettive dopo il riavvio del computer $($env:COMPUTERNAME)." + "`r`n" + "Per controllare i log vedere il file presente in $($logfile)." + "`r`n" + "`r`n" + "Vuoi riavviare ora?", "RIAVVIO NECESSARIO", [System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Warning)
-
-        if ($dialogResult -eq [System.Windows.Forms.DialogResult]::Yes) {
-                log -messaggio "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" -log null
-                Restart-Computer
-        }
-        else {
-                log -messaggio "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" -log null
-                log -messaggio "################################### Il Computer non è stato riavviato tramite MessageBox. Riavviare il computer manualmente per applicare le modifiche ###################################" -log null
-                log -messaggio "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" -log null
-        }
-
+        #messaggio di log finale
+        log -messaggio "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" -log null
 }
 
 # Comando necessario per mostrare le FInestre a schermo
