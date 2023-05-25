@@ -93,6 +93,7 @@ if (Test-Path "HKLM:\Software\RETI") {
         
         # Creazione dell'utente ospite
         try {
+                # Variabile utilizzata per la Password di Ospite
                 $passwordospite = "Password1"
                 New-LocalUser -Name "Ospite" -Password (ConvertTo-SecureString -String $passwordospite -AsPlainText -Force) -ErrorAction Stop
                 log -messaggio "È stato creato l'utente Ospite" -log info
@@ -102,6 +103,7 @@ if (Test-Path "HKLM:\Software\RETI") {
         }
         # Creazione del Gruppo Utenti Locali 
         try {
+                # Comando per creare il nuovo Gruppo "Utenti Locali"
                 New-LocalGroup -Name "Utenti Locali" -ErrorAction Stop
                 log -messaggio "È stato creato il gruppo utenti locali" -log info
         }
@@ -110,6 +112,7 @@ if (Test-Path "HKLM:\Software\RETI") {
         }
         # Spostamento utente Administrator in Utenti Locali
         try {
+                # Comando per spostare un utente in un gruppo
                 Add-LocalGroupMember -Group "Utenti Locali" -Member "Administrator" -ErrorAction Stop
                 log -messaggio "È stato creato il gruppo utenti locali ed Admin è stato spostato al suo interno " -log info
         }
@@ -119,7 +122,9 @@ if (Test-Path "HKLM:\Software\RETI") {
 
         # Creazione della chiave di registro in HKLM\Software\Reti necessaria per check iniziale
         try {
+                # Variabile contenente data e ora da salvare nel valore della chiave di registro
                 $dataora = Get-Date -Format ddMMyyyy_HH:mm
+                # Comando per creare un nuovo oggetto in questo caso una chiave di registro
                 New-Item -Path HKLM:\Software -Name RETI -Value "$dataora" –Force -ErrorAction Stop
                 log -messaggio "É stata creata la chiave di registro" -log info
         }
@@ -129,13 +134,17 @@ if (Test-Path "HKLM:\Software\RETI") {
 
         # Rimuove tutti i file temporanei da C:\Windows\Temp
         try {
+                # Variabile contenente un elenco di tutti i file presenti nella cartella C:\Windows\Temp\
                 $files = Get-ChildItem -Path "C:\Windows\Temp\*" -File -Recurse
+                # Ciclo per verificare quali file presenti in C:\Windows\Temp\ sono aperti o utilizzati da un'altro programma
                 foreach ($file in $files) {
+                        # Viene effettuata un test per ogni file per verificare se risultan aperto, in tal caso la cmdlet non mostrerà alcun errore e continuerà (-ErrorAction SilentlyContinue)
                         if (Test-Path -Path $file.FullName -ErrorAction SilentlyContinue) {
-                                # Se il File è attualmente aperto da un'altro programma e viene salvato un messaggio di log con ERRORE
+                                # Se il File è attualmente aperto da un'altro programma, viene salvato un messaggio di log con ERRORE
                                 log -messaggio "Il file $($file.FullName) è aperto e non può essere eliminato." -log err
                         }
                         else {
+                                # Comando per rimuovere i file all'interno della cartella C:\
                                 Remove-Item -Path $file.FullName -ErrorAction Stop
                         }
                 }
