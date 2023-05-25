@@ -71,7 +71,7 @@ else {
 
         # Rinomina il computer con la sigla CW e la data di esecuzione dello script
         try {
-                Rename-Computer -NewName "$($nomecomputer)" -Force   
+                Rename-Computer -NewName "$($nomecomputer)" -Force -ErrorAction Stop
                 log -messaggio "Il computername è stato cambiato in $nomecomputer" -log info
         }
         catch {
