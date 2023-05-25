@@ -71,8 +71,8 @@ if (Test-Path "HKLM:\Software\RETI") {
         # Comando che richiama la funzione di log e nel salva un primo messaggio contenente data e ora di esecuzione dello script
         log -messaggio "------------------------------------------Script eseguito il $($datadioggi) alle $($ora) ------------------------------------------" -log null
         
-        # In tutte le operazioni successive verrà utilizzato il try catch, comando utile per la gestione degli errori. Qual'ora una funzione dovesse restituire un errore
-        # il comando verrà immediatamente interrotto ed il messggio di errore della cmdlet verrà riportato nel log di ERRORE richiamato all'interno del catch
+        # In tutte le operazioni successive verrà utilizzato il try catch, comando utile per la gestione degli errori. Qualora una funzione dovesse restituire un errore
+        # il comando verrà immediatamente interrotto ed il messaggio di errore della cmdlet verrà riportato nel log di ERRORE richiamato all'interno del catch
         
         # Rinomina il computer con la sigla CW e la data di esecuzione dello script
         
@@ -88,7 +88,7 @@ if (Test-Path "HKLM:\Software\RETI") {
         try {
                 # Variabile utilizzata per la Password di Admin
                 $password = "Admin_" + $nomecomputer
-                # Comando per selezionare l'utente al quale si vogliono apportare modifiche, in questp caso la password,
+                # Comando per selezionare l'utente al quale si vogliono apportare modifiche, in questo caso la password,
                 # la quale deve prima essere convertita in una stringa sicura tramite ConvertTo-SecureString ...
                 Set-LocalUser -Name "Administrator" -Password (ConvertTo-SecureString -String $password -AsPlainText -Force)
                 log -messaggio "La Password di Admin è stata cambiata" -log info
@@ -146,7 +146,7 @@ if (Test-Path "HKLM:\Software\RETI") {
                 # Ciclo per verificare quali file presenti in C:\Windows\Temp\ sono aperti o utilizzati da un'altro programma
                 foreach ($file in $files) {
                         # Viene effettuata un test per ogni file (.FullName viene utilizzato per estrarre il path completo di ogni file) 
-                        # per verificare se risultan aperto, in tal caso la cmdlet non mostrerà alcun errore e continuerà a eseguire il ciclo grazie al parametro (-ErrorAction SilentlyContinue)
+                        # per verificare se risultana aperto, in tal caso la cmdlet non mostrerà alcun errore e continuerà a eseguire il ciclo grazie al parametro (-ErrorAction SilentlyContinue)
                         if (Test-Path -Path $file.FullName -ErrorAction SilentlyContinue) {
                                 # Se il File è attualmente aperto da un'altro programma, viene salvato un messaggio di log con ERRORE
                                 log -messaggio "Il file $($file.FullName) è aperto e non può essere eliminato." -log err
