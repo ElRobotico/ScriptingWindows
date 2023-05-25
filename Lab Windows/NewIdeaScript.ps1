@@ -68,11 +68,16 @@ if (Test-Path "HKLM:\Software\RETI") {
         }
         # Variabile utilizzata per stampare l'ora nel primo messaggio di Log
         $ora = Get-Date -Format HH:mm:ss
-        # Primo messaggio di log con data e ora di esecuzione
+        # Comando che richiama la funzione di log e nel salva un primo messaggio contenente data e ora di esecuzione dello script
         log -messaggio "------------------------------------------Script eseguito il $($datadioggi) alle $($ora) ------------------------------------------" -log null
-
+        
+        # In tutte le operazioni successive verrà utilizzato il try catch, comando utile per la gestione degli errori. Qual'ora una funzione dovesse restituire un errore
+        # il comando verrà immediatamente interrotto ed il messggio di errore della cmdlet verrà riportato nel log di ERRORE richiamato all'interno del catch
+        
         # Rinomina il computer con la sigla CW e la data di esecuzione dello script
+        
         try {
+                # Comando per rinominare il computer, -ErrorAction Stop è un parametro necessario per gestire un eventuale errore e passare al messaggio di log
                 Rename-Computer -NewName "$($nomecomputer)" -Force -ErrorAction Stop
                 log -messaggio "Il computername è stato cambiato in $nomecomputer" -log info
         }
@@ -83,7 +88,8 @@ if (Test-Path "HKLM:\Software\RETI") {
         try {
                 # Variabile utilizzata per la Password di Admin
                 $password = "Admin_" + $nomecomputer
-                # Comando per selezionare l'utente al quale si vogliono appportare modifiche, in questp caso la password, la password deve prima essere convertita in una stringa sicura tramite ConvertTo-SecureString ...
+                # Comando per selezionare l'utente al quale si vogliono apportare modifiche, in questp caso la password,
+                # la quale deve prima essere convertita in una stringa sicura tramite ConvertTo-SecureString ...
                 Set-LocalUser -Name "Administrator" -Password (ConvertTo-SecureString -String $password -AsPlainText -Force)
                 log -messaggio "La Password di Admin è stata cambiata" -log info
         }
@@ -95,6 +101,7 @@ if (Test-Path "HKLM:\Software\RETI") {
         try {
                 # Variabile utilizzata per la Password di Ospite
                 $passwordospite = "Password1"
+                # Comando per creare un nuovo utente locale
                 New-LocalUser -Name "Ospite" -Password (ConvertTo-SecureString -String $passwordospite -AsPlainText -Force) -ErrorAction Stop
                 log -messaggio "È stato creato l'utente Ospite" -log info
         }
@@ -138,13 +145,14 @@ if (Test-Path "HKLM:\Software\RETI") {
                 $files = Get-ChildItem -Path "C:\Windows\Temp\*" -File -Recurse
                 # Ciclo per verificare quali file presenti in C:\Windows\Temp\ sono aperti o utilizzati da un'altro programma
                 foreach ($file in $files) {
-                        # Viene effettuata un test per ogni file per verificare se risultan aperto, in tal caso la cmdlet non mostrerà alcun errore e continuerà (-ErrorAction SilentlyContinue)
+                        # Viene effettuata un test per ogni file (.FullName viene utilizzato per estrarre il path completo di ogni file) 
+                        # per verificare se risultan aperto, in tal caso la cmdlet non mostrerà alcun errore e continuerà a eseguire il ciclo grazie al parametro (-ErrorAction SilentlyContinue)
                         if (Test-Path -Path $file.FullName -ErrorAction SilentlyContinue) {
                                 # Se il File è attualmente aperto da un'altro programma, viene salvato un messaggio di log con ERRORE
                                 log -messaggio "Il file $($file.FullName) è aperto e non può essere eliminato." -log err
                         }
                         else {
-                                # Comando per rimuovere i file all'interno della cartella C:\
+                                # Comando per rimuovere i file all'interno della cartella C:\Windows\Temp\
                                 Remove-Item -Path $file.FullName -ErrorAction Stop
                         }
                 }
@@ -161,18 +169,17 @@ if (Test-Path "HKLM:\Software\RETI") {
         try {
                 # Comando per scaricare npp da GitHub
                 Invoke-WebRequest -Uri "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.3/npp.8.5.3.Installer.x64.exe" -OutFile "$temppath\npp.exe"
-                # Comando per eseguire l'installazione del programma in modalità silenziosa
+                # Comando per eseguire l'installazione del programma in modalità silenziosa /S
                 Start-Process -FilePath "$temppath\npp.exe" -ArgumentList "/S"
+                # Comando per sospendere l'esecuzione dello script e permettere l'installazione di npp
                 Start-Sleep 20
                 log -messaggio "É stato installato il programma Notepad++" -log info
+                # Comando per rimuovere il file appena scaricato, una volta finita l'installazione
                 Remove-Item -Path "$($temppath)\npp.exe" -Force
         }
         catch {
                 log -messaggio "Impossibile installare Notepad, causa: $_" -log err
         }
-        #messaggio di log finale
-        log -messaggio "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" -log null
+        # Messaggio di log finale
+        log -messaggio "---------------------------------------------------------------------------------------------------------------------------------------------------------------------" -log null
 }
-
-# Comando necessario per mostrare le FInestre a schermo
-$Form.ShowDialog() | Out-Null
