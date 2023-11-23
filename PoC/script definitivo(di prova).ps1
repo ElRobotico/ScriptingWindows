@@ -4,7 +4,7 @@ $datadioggi = Get-Date -Format yyyyMMdd
 $nomecomputer = "CW" + "$datadioggi"
 $logfile = "C:\Windows\Logs\$nomecomputer-$datadioggi" + ".log"
 if (Test-Path "HKLM:\Software\RETI") {
-        Write-Host "Lo script è già stato eseguito"
+        Write-Host "Lo script è già stato eseguito."
 }
 else {
 
