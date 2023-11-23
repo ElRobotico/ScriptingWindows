@@ -37,7 +37,7 @@ else {
                 return $output;
         }
         #Primo messaggio di log
-        log -messaggio "--------------------------------Script esegito il $datadioggi --------------------------------" -log null
+        log -messaggio "--------------------------------Script eseguito il $datadioggi --------------------------------" -log null
 
         #1)Rinomina il computer
         try {
